@@ -35,12 +35,13 @@ class _MyHomePageState extends State<MyHomePage> {
   bool isSecondMenu=false;
   bool sizeShow=true;
   bool littelScreen=false;
+  bool beetwin=false;
 
   int numberI=-1;
   int numberJ=-1;
   int numberRow=-1;
   Color colorOne=Colors.white;
-  Color colorOff=Color(0xffabb9e8);
+  Color colorOff=const Color(0xffabb9e8);
   int flx=70;
   double size=0;
   List<IconData> icon=[Icons.shutter_speed,Icons.apple_sharp,Icons.layers];
@@ -60,27 +61,38 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Visibility(
             visible: screenWidth>700||size==screenWidth&&screenWidth<700&&showDashbord==true,
-            child: Expanded(
-            flex: size==screenWidth&&screenWidth<700&&showDashbord==true?13:3,
+            child: Container(
+            width:
+            showDashbord==true&&screenWidth>1200&&size!=screenWidth||
+                sizeShow==false&&size==screenWidth&&screenWidth>1200&&sizeShow!=showDashbord||
+                size!=screenWidth&&screenWidth>1200||
+                size==screenWidth&&screenWidth<1200&&screenWidth>700&&sizeShow==showDashbord
+                ||sizeShow!=showDashbord&&screenWidth>1200&&size!=screenWidth&&size!=0
+                ||size==screenWidth&&screenWidth<700&&showDashbord==true||
+                sizeShow!=showDashbord&&size==screenWidth&&size!=0&&screenWidth<1200&&screenWidth>700
+
+                ?300:50,
               child: Container(
                 height: height,
-                color: Color(0xff405189),
+                color: const Color(0xff405189),
                 child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child:showDashbord==true&&screenWidth>1200||
-                      sizeShow==false&&size==screenWidth||
-                      size!=screenWidth&&screenWidth>1200&&showDashbord==true||
-                  size==screenWidth&&showDashbord==true&&screenWidth<1200&&screenWidth>700
-                     ||sizeShow==true&&showDashbord==false&&screenWidth>1200&&size!=screenWidth&&size!=0
-                  ||size==screenWidth&&screenWidth<700&&showDashbord==true
+                  child:
+                      showDashbord==true&&screenWidth>1200&&size!=screenWidth||
+                      sizeShow==false&&size==screenWidth&&screenWidth>1200&&sizeShow!=showDashbord||
+                      size!=screenWidth&&screenWidth>1200||
+                      size==screenWidth&&screenWidth<1200&&screenWidth>700&&sizeShow==showDashbord
+                      ||sizeShow!=showDashbord&&screenWidth>1200&&size!=screenWidth&&size!=0
+                      ||size==screenWidth&&screenWidth<700&&showDashbord==true||
+                      sizeShow!=showDashbord&&size==screenWidth&&size!=0&&screenWidth<1200&&screenWidth>700
                       ?
 
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("MENU",style: TextStyle(fontSize: 10,color: colorOff,fontWeight: FontWeight.bold),),
-                      SizedBox(height: 15,),
+                      const SizedBox(height: 15,),
                       GestureDetector(
                         onTap: (){
                           setState(() {
@@ -99,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Row(
                               children: [
                                 Icon(Icons.shutter_speed,color:isDashbord==true&&numberRow==0?colorOne:colorOff ,),
-                                SizedBox(width: 20,),
+                                const SizedBox(width: 20,),
                                 Text("Dashbord",style:isDashbord==true&&numberRow==0?textStyleOne:textStyleOff,),
                               ],
                             ),
@@ -134,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             Row(
                                               children: [
                                                 Icon(Icons.linear_scale,color:isDashbord==true&&numberI==i?colorOne:colorOff ,size: 10,),
-                                                SizedBox(width: 20,),
+                                                const SizedBox(width: 20,),
                                                 Text("onemenue",style:isSecondMenu==true&&numberI==i?textStyleOne:textStyleOff,),
                                               ],
                                             ),
@@ -163,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                           Icon(Icons.circle_outlined,
                                                             color:isSecondMenu==true&&numberJ==j?colorOne:colorOff,
                                                             size: 5,),
-                                                          SizedBox(
+                                                          const SizedBox(
                                                             width: 20,
                                                           ),
                                                           Text("isSecondMenu",style: textStyleOff,),
@@ -182,8 +194,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             ],
                           )
                       ),
-                      SizedBox(height: 15,),
-                      SizedBox(height: 15,),
+                      const SizedBox(height: 15,),
+                      const SizedBox(height: 15,),
                       GestureDetector(
                         onTap: (){
                           setState(() {
@@ -202,7 +214,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Row(
                               children: [
                                 Icon(Icons.apple_sharp,color:isDashbord==true&&numberRow==1?colorOne:colorOff ,),
-                                SizedBox(width: 20,),
+                                const SizedBox(width: 20,),
                                 Text("Apps",style:isDashbord==true&&numberRow==1?textStyleOne:textStyleOff,),
                               ],
                             ),
@@ -237,7 +249,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             Row(
                                               children: [
                                                 Icon(Icons.linear_scale,color:isDashbord==true&&numberI==i?colorOne:colorOff ,size: 10,),
-                                                SizedBox(width: 20,),
+                                                const SizedBox(width: 20,),
                                                 Text("onemenue",style:isSecondMenu==true&&numberI==i?textStyleOne:textStyleOff,),
                                               ],
                                             ),
@@ -266,7 +278,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                           Icon(Icons.circle_outlined,
                                                             color:isSecondMenu==true&&numberJ==j?colorOne:colorOff,
                                                             size: 5,),
-                                                          SizedBox(
+                                                          const SizedBox(
                                                             width: 20,
                                                           ),
                                                           Text("isSecondMenu",style: textStyleOff,),
@@ -285,8 +297,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             ],
                           )
                       ),
-                      SizedBox(height: 15,),
-                      SizedBox(height: 15,),
+                      const SizedBox(height: 15,),
+                      const SizedBox(height: 15,),
                       GestureDetector(
                         onTap: (){
                           setState(() {
@@ -304,7 +316,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Row(
                               children: [
                                 Icon(Icons.layers,color:isDashbord==true&&numberRow==2?colorOne:colorOff ,),
-                                SizedBox(width: 20,),
+                                const SizedBox(width: 20,),
                                 Text("dashbord",style:isDashbord==true&&numberRow==2?textStyleOne:textStyleOff,),
                               ],
                             ),
@@ -338,7 +350,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             Row(
                                               children: [
                                                 Icon(Icons.linear_scale,color:isDashbord==true&&numberI==i?colorOne:colorOff ,size: 10,),
-                                                SizedBox(width: 20,),
+                                                const SizedBox(width: 20,),
                                                 Text("onemenue",style:isSecondMenu==true&&numberI==i?textStyleOne:textStyleOff,),
                                               ],
                                             ),
@@ -367,7 +379,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                           Icon(Icons.circle_outlined,
                                                             color:isSecondMenu==true&&numberJ==j?colorOne:colorOff,
                                                             size: 5,),
-                                                          SizedBox(
+                                                          const SizedBox(
                                                             width: 20,
                                                           ),
                                                           Text("isSecondMenu",style: textStyleOff,),
@@ -410,7 +422,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   sizeShow==true&&showDashbord==true&&size==screenWidth||
                   sizeShow==true&&showDashbord==false&&screenWidth>1200&&size!=screenWidth&&size!=0
               ||size==screenWidth&&screenWidth<700&&showDashbord==true
-                  ?15:flx,
+                  ?13:70,
               child: Column(
           children: [
             Container(
@@ -420,25 +432,42 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   Expanded(
                     flex: 1,
-                    child: Container(
+                    child: SizedBox(
                       height: 50,
 
 
                           child: IconButton(
                             onPressed: (){
+                              double bettwensize;
                               setState(() {
 
                                 if (screenWidth<1200&&screenWidth>700) {
                                   setState(() {
                                     sizeShow=!sizeShow;
                                     showDashbord=!showDashbord;
+                                     bettwensize=size;
                                     size=screenWidth;
+
+                                    if (size==bettwensize) {
+                                      setState(() {
+                                        size=0;
+                                      });
+
+                                    }
                                   });
                                 }else
                                   if(screenWidth>1200){
                                     setState(() {
+                                      sizeShow=!sizeShow;
                                       showDashbord=!showDashbord;
+                                      bettwensize=size;
                                       size=screenWidth;
+                                      if (size==bettwensize) {
+                                        setState(() {
+                                          size=0;
+                                        });
+
+                                      }
                                     });
                                   }else if (screenWidth<700) {
                                     showDashbord=true;
@@ -452,12 +481,19 @@ class _MyHomePageState extends State<MyHomePage> {
                               print(size);
                               print(screenWidth);
 
-                            }, icon: Icon(showDashbord==true&&screenWidth>1200?Icons.menu:Icons.arrow_forward)),
+                            }, icon: Icon(
+                              showDashbord==true&&screenWidth>1200&&size!=screenWidth&&sizeShow!=showDashbord||
+                                  sizeShow==false&&size==screenWidth&&screenWidth>1200&&sizeShow!=showDashbord||
+                                  size!=screenWidth&&screenWidth>1200&&showDashbord==true||
+                                  size==screenWidth&&screenWidth<1200&&screenWidth>700&&sizeShow==showDashbord
+                                  ||sizeShow!=showDashbord&&screenWidth>1200&&size!=screenWidth&&size!=0
+                                  ||size==screenWidth&&screenWidth<700&&showDashbord==true||
+                                  sizeShow!=showDashbord&&size==screenWidth&&size!=0&&screenWidth<1200&&screenWidth>700?Icons.menu:Icons.arrow_forward)),
 
                     ),
                   ),
                   Expanded(
-                      flex: 20,
+                      flex: 18,
                       child:  Container(
                         height: 50,
                       ),
