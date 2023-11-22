@@ -10,7 +10,7 @@ class AppbarBloc extends Bloc<AppbarEvent, AppbarState> {
   AppbarBloc() : super(AppbarInitial()) {
     on<ShowSearchAppbarEvent>((event, emit) {
       // TODO: implement event handler
-      emit(ShowSearchAppbarState());
+      emit(ShowSearchAppbarState(isTextField:event.isTextField));
     });
     on<TimeLimitEvent>((event, emit) {
       emit(TimeLimitState(event.timeLimit));

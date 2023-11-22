@@ -9,6 +9,7 @@ import 'package:untitled/core/widget/containertask.dart';
 import 'package:untitled/core/widget/icone_text.dart';
 import 'package:untitled/core/widget/information_screen.dart';
 import 'package:untitled/core/widget/time_limit.dart';
+import 'package:untitled/screen/appbar_page.dart';
 
 import 'data_dashboard.dart';
 
@@ -338,7 +339,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                             screenWidth > 720
                                 ? Expanded(
-                                    child: Row(
+                              flex: 1,
+                                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween
+                                      ,
                                       children: [
                                         isAppbar == false && screenWidth > 850
                                             ? Container(
@@ -369,92 +372,17 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ),
                                   )
                                 : const Center(),
+                            screenWidth<720?const Spacer():const SizedBox(),
                             BlocBuilder<DashboardBloc, DashboardState>(
                               builder: (context, state) {
-                                return Expanded(
+
+                                return screenWidth>770?Expanded(
                                     flex: isAppbar &&
-                                            screenWidth > 720 &&
-                                            screenWidth < 796
+                                            screenWidth > 720 && screenWidth < 796
                                         ? 2
                                         : 1,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        screenWidth < 720
-                                            ? Container(
-                                                decoration: const BoxDecoration(
-                                                    color: ColorsStyle
-                                                        .backSearchButton,
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(12))),
-                                                child: IconButton(
-                                                    onPressed: () {
-                                                      isTextField = !isTextField;
-                                                      BlocProvider.of<AppbarBloc>(
-                                                              context)
-                                                          .add(
-                                                              ShowSearchAppbarEvent());
-                                                    },
-                                                    icon:
-                                                        const Icon(Icons.search,color: ColorsStyle.secondaryColor,size: 17,)),
-                                              )
-                                            : Container(),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 8),
-                                          child: SizedBox(
-                                              width: 30,
-                                              child: Image.asset(
-                                                  "assets/images/avatar-4.png")),
-                                        ),
-                                        const SizedBox(width: 5,),
-                                        iconButton(Icons.add_business_rounded),
-                                        const SizedBox(width: 5,),
-                                        iconButton(Icons.shopping_basket_rounded),
-                                        const SizedBox(width: 5,),
-                                        iconButton(Icons.filter_center_focus),
-                                        const SizedBox(width: 5,),
-                                        iconButton(Icons.calendar_month_sharp),
-                                        const SizedBox(width: 5,),
-                                        iconButton(Icons.add_alert_sharp),
-                                        InkWell(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(right: 20),
-                                            child: Container(
-                                              height: 70,
-                                              decoration: BoxDecoration(
-                                                  color: screenWidth > 700
-                                                      ? ColorsStyle.secondaryColorProfile
-                                                      : ColorsStyle.colorOne,
-                                                  borderRadius:
-                                                      const BorderRadius.all(
-                                                          Radius.circular(5))),
-                                              child: Row(mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets.all(8.0),
-                                                    child: ContainerWidget(width: 35, height: 35, radius: 100,colorBack: Colors.red, widget:
-                                                    ClipOval(child: Image.asset("assets/images/avatar-3.jpg",fit: BoxFit.cover,))),
-                                                  ),
-
-                                                  screenWidth > 1300
-                                                      ?  const SizedBox(
-                                                        width: 120,
-                                                        child: ListTile(
-                                                          title: Text("Amir king"),
-                                                          subtitle: Text("Rahmani"),
-                                                        ),
-                                                      )
-                                                      : const Center()
-
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-
-                                      ],
-                                    ));
+                                    child: AppbarPage(withScreen: screenWidth,)):
+                                AppbarPage(withScreen: screenWidth,width: 400,);
                               },
                             ),
                           ],
@@ -485,7 +413,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                                 screenWidth < 600
                                     ? const informationScreen()
-                                    : Container()
+                                    : const SizedBox()
                               ],
                             ),
                             const Spacer(),
@@ -587,7 +515,7 @@ class _MyHomePageState extends State<MyHomePage> {
               return Positioned(
                   left: screenWidth < 650 && screenWidth > 600 ? 250 : 0,
                   top: 70,
-                  child: screenWidth < 720 && isTextField == true
+                  child: screenWidth < 720 && state is ShowSearchAppbarState&&state.isTextField==true
                       ? Container(
                           width: screenWidth < 600 ? screenWidth : 350,
                           height: 60,
@@ -652,15 +580,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget iconButton(
-    IconData icon,
-  ) {
-    return IconButton(
-        hoverColor: ColorsStyle.focusColor,
-        onPressed: () {},
-        icon: Icon(
-          icon,
-          color: ColorsStyle.black38,
-        ));
-  }
 }
