@@ -15,5 +15,9 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     on<ShowPopForDashboardEvent>((event, emit) {
       emit(ShowPopForDashboardState());
     });
+    on<ShowSecondPopEvent>((event, emit) {
+      emit(ShowSecondPopState(event.show,event.top));
+
+    });
   }
 }

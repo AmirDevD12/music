@@ -8,10 +8,13 @@ import 'package:untitled/core/widget/container_widget.dart';
 import 'package:untitled/core/widget/containertask.dart';
 import 'package:untitled/core/widget/icone_text.dart';
 import 'package:untitled/core/widget/information_screen.dart';
+import 'package:untitled/core/widget/search_box_body.dart';
+import 'package:untitled/core/widget/textfield_widget.dart';
 import 'package:untitled/core/widget/time_limit.dart';
 import 'package:untitled/screen/appbar_page.dart';
 
 import 'data_dashboard.dart';
+import 'menu_little_dashboard.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -22,15 +25,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool sizeShow = true;
-  bool isTextField = false;
   bool showDashboard = true;
   bool isDashboard = false;
   bool isAppbar = false;
-  int numberRow = 0;
+  bool secondPop =false;
   bool isMouseRegin = false;
-  int stack = -1;
-  double topPosition = 30;
-  double size = 0;
+
 
   @override
   void initState() {
@@ -42,12 +42,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    List<IconData> icon = [
+
+  List<IconData> icon = [
       Icons.shutter_speed,
       Icons.apple_sharp,
       Icons.layers
     ];
-
+    int numberRow = 0;
+    int stack = -1;
+    double topPosition = 30;
+    double size = 0;
     double height = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     double changWith = screenWidth / 3;
@@ -176,7 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                         SizedBox(
                                           width: 300,
                                           height: height,
-                                          child: const DataDashboard(),
+                                          child: const DataDashboard(isIcon: true,),
                                         ),
                                         const SizedBox(
                                           height: 15,
@@ -189,6 +193,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
+
                                         SizedBox(
                                           width: 150,
                                           height: height - 100,
@@ -203,8 +208,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     padding: const EdgeInsets.only(
                                                         top: 22),
                                                     child: MouseRegion(
-                                                        onHover: (PointerHoverEvent
-                                                            event) {
+                                                        onHover: (PointerHoverEvent event) {
                                                           mouseRegion = index;
                                                           if (mouseRegion ==
                                                                   index &&
@@ -347,14 +351,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                             ? Container(
                                                 width: 350,
                                                 decoration: const BoxDecoration(
-                                                    color: ColorsStyle.colorBox,
+                                                    color: ColorsStyle.secondaryColorProfile,
                                                     borderRadius: BorderRadius.all(
-                                                        Radius.circular(10))),
-                                                child: textField(
-                                                    (value) {},
-                                                    "search...",
-                                                    BorderSide.none,
-                                                    const Icon(Icons.search,color: ColorsStyle.secondaryColor,size: 17,)),
+                                                        Radius.circular(5))),
+                                                child: TextFieldWidget(
+                                                    value:(value) {},
+                                                    text:"search...",
+                                                    borderSide: BorderSide.none,
+                                                    icon: const Icon(Icons.search,color: ColorsStyle.secondaryColor,size: 17,)),
                                               )
                                             : Expanded(
                                                 child: Container(
@@ -362,11 +366,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     color: ColorsStyle.screen,
                                                     borderRadius: BorderRadius.all(
                                                         Radius.circular(10))),
-                                                child: textField(
-                                                    (value) {},
-                                                    "search...",
-                                                    BorderSide.none,
-                                                    const Icon(Icons.search,color: ColorsStyle.secondaryColor,size: 17,)),
+                                                child: TextFieldWidget(
+                                                    value:(value) {},
+                                                    text:"search...",
+                                                    borderSide: BorderSide.none,
+                                                    icon: const Icon(Icons.search,color: ColorsStyle.secondaryColor,size: 17,)),
                                               ))
                                       ],
                                     ),
@@ -398,23 +402,26 @@ class _MyHomePageState extends State<MyHomePage> {
                             const SizedBox(
                               width: 15,
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  "ProjectList",
-                                  style: TextStyle(
-                                      color: ColorsStyle.grayDark,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                screenWidth < 600
-                                    ? const informationScreen()
-                                    : const SizedBox()
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    "ProjectList",
+                                    style: TextStyle(
+                                        color: ColorsStyle.grayDark,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  screenWidth < 600
+                                      ? const informationScreen()
+                                      : const Center()
+                                ],
+                              ),
                             ),
                             const Spacer(),
                             Padding(
@@ -426,32 +433,53 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       const SizedBox(height: 15,),
-                           Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(mainAxisAlignment: MainAxisAlignment.start,
+                           Expanded(
+                             child: Padding(
+                              padding: const EdgeInsets.fromLTRB(20, 8, 8, 8),
+                              child: Row(mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const ContainerWidget(width: 110, height: 38, radius: 5,colorBack: ColorsStyle.success,
+                                    widget:IconText(iconWidget: Icons.add,text: "Add New"),),
+                                  const Spacer(),
+                                  screenWidth>630?
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 300,
+                                        decoration:  BoxDecoration(
+                                            color: ColorsStyle.colorOne,
+                                            border: Border.all(color: ColorsStyle.colorBox,width: 1),
+                                            borderRadius: const BorderRadius.all(
+                                                Radius.circular(5))),
+                                        child: TextFieldWidget(
+                                            value:(value) {},
+                                            text:"search...",
+                                            borderSide: BorderSide.none,
+                                            icon: const Icon(Icons.search,color: ColorsStyle.secondaryColor,size: 17,)),
+                                      ),
+                                      const SizedBox(width: 10,),
+                                      const TimeLimit()
+                                    ],
+                                  ):const SizedBox(),
+
+                                ],
+                              ),
+                                                       ),
+                           ),
+                          screenWidth<=630?
+                           Expanded(
+                            child: Row(
                               children: [
-                                const ContainerWidget(width: 110, height: 38, radius: 5,colorBack: ColorsStyle.success,
-                                  widget:IconText(iconWidget: Icons.add,text: "Add New"),),
-                                const Spacer(),
-                                Container(
-                                  width: 350,
-                                  decoration:  BoxDecoration(
-                                      color: ColorsStyle.colorOne,
-                                      border: Border.all(color: ColorsStyle.colorBox,width: 1),
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(5))),
-                                  child: textField(
-                                          (value) {},
-                                      "search...",
-                                      BorderSide.none,
-                                      const Icon(Icons.search,color: ColorsStyle.secondaryColor,size: 17,)),
-                                ),
+                                const SizedBox(width: 15,),
+                                screenWidth>510?const SearchBox():
+                                const Expanded(child: SearchBox()),
                                 const SizedBox(width: 10,),
-                                const TimeLimit()
+                                const TimeLimit(),
+                                const SizedBox(width: 45,)
                               ],
                             ),
-                          ),
-
+                          ):const SizedBox(),
+                      const SizedBox(height: 10,),
                       Expanded(
                         flex: 10,
                         child: Wrap(
@@ -478,34 +506,89 @@ class _MyHomePageState extends State<MyHomePage> {
 
           ///menu Dashboard
           BlocBuilder<DashboardBloc, DashboardState>(
-            builder: (context, state) {
+            builder: (context, state) {  print(state);
               return Positioned(
                   top: topPosition,
                   left: 50,
                   child: isMouseRegin == true
                       ? MouseRegion(
                           onHover: (PointerHoverEvent event) {
-                            isMouseRegin = true;
-                            BlocProvider.of<DashboardBloc>(context)
-                                .add(ShowPopForDashboardEvent());
+
+                              isMouseRegin = true;
                           },
                           onExit: (PointerExitEvent event) {
-                            isMouseRegin = false;
+                                      isMouseRegin = false;
                             BlocProvider.of<DashboardBloc>(context)
                                 .add(ShowPopForDashboardEvent());
                           },
                           child: Container(
-                            width: 100,
-                            height: 40,
+                            width: 250,
+                            height: 140,
                             color: ColorsStyle.backgroundDashboard,
-                            child: const Center(
-                                child: Text(
-                              "KING",
-                              style: TextStyle(color: ColorsStyle.colorOne),
-                            )),
+                            child:const MenuLittleDashboard()
                           ),
                         )
                       : Container());
+
+            },
+          ),
+          BlocBuilder<DashboardBloc, DashboardState>(
+            builder: (context, state) {
+              TextStyle textStyleOne = const TextStyle(
+                  fontWeight: FontWeight.w500, color: ColorsStyle.colorOne, fontSize: 15);
+              TextStyle textStyleOff = const TextStyle(
+                fontWeight: FontWeight.w500,
+                color: ColorsStyle.colorOff,
+                fontSize: 15,
+              );
+              double top=0;
+              if (state is ShowSecondPopState) {
+
+                top=(topPosition+(state.top*45));
+              }
+
+
+              return  state is ShowSecondPopState&&state.show&&state.top>0?Positioned(
+                  top: top,
+                  left: 300,
+                  child: MouseRegion(
+                    onHover: (PointerHoverEvent event) {
+
+                        isMouseRegin = true;
+                        BlocProvider.of<DashboardBloc>(context)
+                            .add(ShowSecondPopEvent(isMouseRegin, state.top));
+                    },
+                    onExit: (PointerExitEvent event) {
+                      BlocProvider.of<DashboardBloc>(context)
+                          .add(ShowPopForDashboardEvent());
+                    },
+                    child:
+                    Container(
+
+                        color: ColorsStyle.backgroundDashboard,
+                        child: Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Column(
+                            children: [
+                              MouseRegion(
+                                onHover: (event){
+                                  secondPop=true;
+                                },
+                                onExit: (exit){
+                                  secondPop =false;
+                                },
+                                child: Row(
+                                  children: [
+                                    Text("Chat Application",style: secondPop?textStyleOne:textStyleOff,),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                    ),
+                  )
+              ):SizedBox();
             },
           ),
 
@@ -530,11 +613,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                 width:
                                     screenWidth < 600 ? screenWidth - 100 : 300,
                                 height: 40,
-                                child: textField(
-                                  (value) {},
-                                  "search...",
-                                  const BorderSide(color: ColorsStyle.gray),
-                                  Container(
+                                child: TextFieldWidget(
+                                value:   (value) {},
+                                 text:  "search...",
+                                  borderSide:  const BorderSide(color: ColorsStyle.gray),
+                                  icon: Container(
                                     width: 40,
                                     height: 40,
                                     color: ColorsStyle.backgroundDashboard,
@@ -557,27 +640,5 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget textField(
-    ValueChanged<String>? value,
-    String text,
-    BorderSide borderSide,
-    Widget icon,
-  ) {
-    return SizedBox(
-      height: 40,
-      child: TextField(
-        onChanged: value,
-        decoration: InputDecoration(
-          contentPadding: const EdgeInsets.only(left: 20),
-          prefixIcon: icon,
-
-          border: OutlineInputBorder(borderSide: borderSide),
-          labelText: text,
-          // suffixIcon: Icon(Icons.search_rounded),
-          labelStyle: const TextStyle(color: ColorsStyle.gray),
-        ),
-      ),
-    );
-  }
 
 }

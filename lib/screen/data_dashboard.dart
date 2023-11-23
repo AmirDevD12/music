@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import '../core/style/color_style.dart';
 
 class DataDashboard extends StatefulWidget {
-  const DataDashboard({Key? key}) : super(key: key);
+  final bool isIcon;
+  const DataDashboard({Key? key, required this.isIcon}) : super(key: key);
 
   @override
   State<DataDashboard> createState() => _DataDashboardState();
@@ -75,13 +76,14 @@ class _DataDashboardState extends State<DataDashboard> {
                   children: [
                     Row(
                       children: [
+                     widget.isIcon?
                         Icon(
                           icon[index],
                           color: isDashboard == true && numberRow == index ||
                               isMouseRegin && numberRow == index
                               ? ColorsStyle.colorOne
                               : ColorsStyle.colorOff,
-                        ),
+                        ):const SizedBox(),
                         const SizedBox(
                           width: 20,
                         ),

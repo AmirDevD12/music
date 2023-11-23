@@ -1,3 +1,4 @@
+import 'package:dotted_decoration/dotted_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/core/style/color_style.dart';
 
@@ -72,14 +73,10 @@ class ContainerTask extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "namenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamenamename",
-                          maxLines: 1,
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          information,
-                        )
+                    ListTile(
+                      title: Text("name"),
+                      subtitle: Text(information),
+                    )
                       ],
                     ),
                   ),
@@ -88,10 +85,11 @@ class ContainerTask extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const Divider(
-                height: 1,
-                color: Colors.grey,
-              )
+              Container(
+                decoration: DottedDecoration(linePosition: LinePosition.top),
+                height: 0,
+                width: 440,
+              ),
             ],
           ),
         ),

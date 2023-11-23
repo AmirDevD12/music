@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:untitled/block/appbar_screen/appbar_bloc.dart';
-import 'package:untitled/block/dashboard_bloc.dart';
+
 import 'package:untitled/core/style/color_style.dart';
 import 'package:untitled/core/widget/container_widget.dart';
 import 'package:untitled/core/widget/iconbutton.dart';
@@ -23,8 +24,6 @@ class AppbarPage extends StatelessWidget {
               ? Container(
 
             decoration: const BoxDecoration(
-                color: ColorsStyle
-                    .backSearchButton,
                 borderRadius:
                 BorderRadius.all(
                     Radius.circular(12))),
@@ -37,20 +36,29 @@ class AppbarPage extends StatelessWidget {
                       ShowSearchAppbarEvent(isTextField: isTextField));
                 },
                 icon:
-                const Icon(Icons.search,color: ColorsStyle.secondaryColor,size: 17,)),
+                const Icon(Icons.search,color: ColorsStyle.secondaryColor,size: 20,)),
           )
               : Container(),
           Padding(
             padding: const EdgeInsets.only(left: 8),
             child: SizedBox(
                 width: 30,
-                child: Image.asset(
-                    "assets/images/avatar-4.png")),
+                height: 20,
+                child:    SvgPicture.asset(
+                  "assets/images/germany.svg",
+                  semanticsLabel: 'Acme Logo',
+                ),),
           ),
-          const SizedBox(width: 5,),
-          const IconButtonWidget( icon: Icons.add_business_rounded, ),
-          const SizedBox(width: 5,),
-          const IconButtonWidget(icon:Icons.shopping_basket_rounded),
+          withScreen>630?
+          const Row(
+            children: [
+              SizedBox(width: 5,),
+              IconButtonWidget( icon: Icons.add_business_rounded, ),
+              SizedBox(width: 5,),
+              IconButtonWidget(icon:Icons.shopping_basket_rounded),
+            ],
+          ):const SizedBox(),
+
           const SizedBox(width: 5,),
           const IconButtonWidget(icon:Icons.filter_center_focus),
           const SizedBox(width: 5,),
@@ -97,6 +105,6 @@ class AppbarPage extends StatelessWidget {
       ),
     );
   },
-);;
+);
   }
 }
