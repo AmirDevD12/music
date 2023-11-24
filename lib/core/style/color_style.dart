@@ -22,4 +22,19 @@ class ColorsStyle {
   static const Color gray = Colors.grey;
   static const Color black12 = Colors.black12;
   static const Color yellow = Colors.yellowAccent;
+
+  static List<Color> getAllColors() {
+    return [
+      colorOff,
+      backgroundDashboard,
+      colorBox,
+      focusColor,
+      backSearchButton,
+      grayDark,
+      success,
+      black12,
+      dangerSubtle
+    ];
+  }
+
 }

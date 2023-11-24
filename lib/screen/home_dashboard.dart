@@ -42,6 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    List<Color> colorsList = ColorsStyle.getAllColors();
+
 
   List<IconData> icon = [
       Icons.shutter_speed,
@@ -54,16 +56,6 @@ class _MyHomePageState extends State<MyHomePage> {
     double size = 0;
     double height = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-    double changWith = screenWidth / 3;
-    if (screenWidth < 1300 && screenWidth > 1000) {
-      changWith = (screenWidth - 252) / 2;
-    }
-    if (screenWidth < 1000) {
-      changWith = (screenWidth - 92) / 2;
-    }
-    if (screenWidth < 510) {
-      changWith = screenWidth;
-    }
     return Scaffold(
       backgroundColor: Colors.black12,
       body: Stack(
@@ -484,15 +476,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         flex: 10,
                         child: Wrap(
                           children: <Widget>[
-                            for (int i = 0; i < 8; i++)
+
+                            for (int i = 1; i < 9; i++)
                               ContainerTask(
                                 updateDate: '"Updated 3hrs ago"',
-                                path: 'assets/images/avatar-10.jpg',
-                                issue: 'Slack brand logo design',
+                                path: 'assets/images/dropbox$i.png',
+                                issue: 'Last update : 08 May',
                                 information:
                                     'Create a Brand logo design for a   admin.',
-                                width: screenWidth,
-                                width2: changWith,
+                                 backImage: colorsList[i],
                               ),
                           ],
                         ),
