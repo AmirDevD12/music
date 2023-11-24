@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled/block/appbar_screen/appbar_bloc.dart';
 
 class PopupMenuButtonWidget extends StatelessWidget {
-  const PopupMenuButtonWidget({Key? key}) : super(key: key);
+  final ValueChanged<String>? value;
+  const PopupMenuButtonWidget({Key? key, this.value}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +12,7 @@ class PopupMenuButtonWidget extends StatelessWidget {
       PopupMenuButton(color: Colors.white,
         icon: const Icon(Icons.arrow_drop_down),
         position: PopupMenuPosition.under,
-        onSelected: (value) {
-          BlocProvider.of<AppbarBloc>(context).add(TimeLimitEvent(timeLimit: value));
-        },
+        onSelected:value,
         itemBuilder: (BuildContext bc) {
           return const [
             PopupMenuItem(

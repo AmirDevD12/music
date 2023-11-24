@@ -33,7 +33,9 @@ class TimeLimit extends StatelessWidget {
           const SizedBox(
             width: 20,
           ),
-          const PopupMenuButtonWidget(),
+           PopupMenuButtonWidget(value: (values){
+             BlocProvider.of<AppbarBloc>(context).add(TimeLimitEvent(timeLimit: values));
+           }),
         ],
       ),
     );
