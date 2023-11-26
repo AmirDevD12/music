@@ -17,7 +17,7 @@ class SearchBox extends StatelessWidget {
               value:(value) {},
           text:"search...",
          borderSide: BorderSide.none,
-         icon: const Icon(Icons.search,color: ColorsStyle.secondaryColor,size: 17,)),
+          prefixIcon: const Icon(Icons.search,color: ColorsStyle.secondaryColor,size: 17,)),
     );
   }
 }

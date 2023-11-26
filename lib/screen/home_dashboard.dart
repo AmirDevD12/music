@@ -30,6 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
   bool isAppbar = false;
   bool secondPop =false;
   bool isMouseRegin = false;
+  bool hovering=false;
 
 
   @override
@@ -350,7 +351,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     value:(value) {},
                                                     text:"search...",
                                                     borderSide: BorderSide.none,
-                                                    icon: const Icon(Icons.search,color: ColorsStyle.secondaryColor,size: 17,)),
+                                                    prefixIcon: const Icon(Icons.search,color: ColorsStyle.secondaryColor,size: 17,)),
                                               )
                                             : Expanded(
                                                 child: Container(
@@ -362,7 +363,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     value:(value) {},
                                                     text:"search...",
                                                     borderSide: BorderSide.none,
-                                                    icon: const Icon(Icons.search,color: ColorsStyle.secondaryColor,size: 17,)),
+                                                    prefixIcon: const Icon(Icons.search,color: ColorsStyle.secondaryColor,size: 17,)),
                                               ))
                                       ],
                                     ),
@@ -430,8 +431,19 @@ class _MyHomePageState extends State<MyHomePage> {
                               padding: const EdgeInsets.fromLTRB(20, 8, 8, 8),
                               child: Row(mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  const ContainerWidget(width: 110, height: 38, radius: 5,colorBack: ColorsStyle.success,
-                                    widget:IconText(iconWidget: Icons.add,text: "Add New"),),
+                                  InkWell(
+                                    onTap: (){},
+                                    onHover: (hover){
+                                      setState(() {
+                                        hovering = hover;
+                                      });
+                                    },
+                                    child:ContainerWidget(width: 120, height: 38, radius: 5,colorBack:hovering?ColorsStyle.grayDark: ColorsStyle.success,
+                                      widget:const Padding(
+                                        padding: EdgeInsets.only(right: 5.0),
+                                        child: IconText(iconWidget: Icons.add,text: "Add New"),
+                                      ),),
+                                  ),
                                   const Spacer(),
                                   screenWidth>630?
                                   Row(
@@ -447,7 +459,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                             value:(value) {},
                                             text:"search...",
                                             borderSide: BorderSide.none,
-                                            icon: const Icon(Icons.search,color: ColorsStyle.secondaryColor,size: 17,)),
+                                            prefixIcon: const Icon(Icons.search,color: ColorsStyle.secondaryColor,size: 17,)),
                                       ),
                                       const SizedBox(width: 10,),
                                       const TimeLimit()
@@ -480,7 +492,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             for (int i = 1; i < 9; i++)
                               ContainerTask(
                                 updateDate: '"Updated 3hrs ago"',
-                                path: 'assets/images/dropbox$i.png',
+                                path: 'assets/images/dropbox ($i).png',
                                 issue: 'Last update : 08 May',
                                 information:
                                     'Create a Brand logo design for a   admin.',
@@ -609,7 +621,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 value:   (value) {},
                                  text:  "search...",
                                   borderSide:  const BorderSide(color: ColorsStyle.gray),
-                                  icon: Container(
+                                  prefixIcon: null,
+                                  suffixIcon:  Container(
                                     width: 40,
                                     height: 40,
                                     color: ColorsStyle.backgroundDashboard,

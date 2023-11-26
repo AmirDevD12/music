@@ -41,6 +41,7 @@ dependencies:
   iconsax: ^0.0.8
   flutter_svg: ^1.1.6
   dotted_decoration: ^2.0.0
+  step_progress_indicator: ^1.0.2
 
 
 dev_dependencies:
